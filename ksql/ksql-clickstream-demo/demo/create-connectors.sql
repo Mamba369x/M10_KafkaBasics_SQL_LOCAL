@@ -1,3 +1,8 @@
+-- Drop existing connectors if they exist
+DROP CONNECTOR IF EXISTS datagen_clickstream_codes;
+DROP CONNECTOR IF EXISTS datagen_clickstream_users;
+DROP CONNECTOR IF EXISTS datagen_clickstream;
+
 CREATE SOURCE CONNECTOR datagen_clickstream_codes WITH (
   'connector.class'          = 'io.confluent.kafka.connect.datagen.DatagenConnector',
   'kafka.topic'              = 'clickstream_codes',
