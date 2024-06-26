@@ -40,6 +40,7 @@ podman exec -it ksqldb-cli ksql http://ksqldb-server:8088
 
 ```ksql
 RUN SCRIPT '/scripts/create-connectors.sql';
+```
 
 ![Step 5:](screenshots/created_connectors.png)
 
@@ -47,6 +48,7 @@ RUN SCRIPT '/scripts/create-connectors.sql';
 
 ```ksql
 print clickstream_users limit 3;
+```
 
 ![Step 6:](screenshots/stream_data.png)
 
@@ -58,6 +60,7 @@ print clickstream_users limit 3;
 
 ```ksql
 RUN SCRIPT '/scripts/statements.sql';
+```
 
 ![Step 8:](screenshots/stream_loaded.png)
 
@@ -65,6 +68,7 @@ RUN SCRIPT '/scripts/statements.sql';
 
 ```ksql
 RUN SCRIPT '/scripts/bandwidth_statements.sql';
+```
 
 ![Step 9:](screenshots/stream_loaded_bandwidth.png)
 
@@ -103,8 +107,5 @@ podman exec -it grafana bash -c '/scripts/clickstream-analysis-dashboard.sh'
 ./sessionize-data.sh
 ```
 ![Step 15:](screenshots/twelve_connectors.png)
-![Step 15:](screenshots/connect_tables.png)
-![Step 15:](screenshots/connect_tables.png)
-![Step 15:](screenshots/connect_tables.png)
 
 
