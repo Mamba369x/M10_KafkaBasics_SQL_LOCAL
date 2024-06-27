@@ -64,48 +64,42 @@ RUN SCRIPT '/scripts/statements.sql';
 
 ![Step 8:](screenshots/stream_loaded.png)
 
-* Step 9: Create and load bandwidth streaming data
+* Step 9-10: Verify data and ongoing streaming flow
 
-```ksql
-RUN SCRIPT '/scripts/bandwidth_statements.sql';
-```
+![Step 9:](screenshots/verify_data.png)
+![Step 10:](screenshots/verify_data_flow.png)
 
-![Step 9:](screenshots/stream_loaded_bandwidth.png)
-
-* Step 10-11: Verify data and ongoing streaming flow
-
-![Step 10:](screenshots/verify_data.png)
-![Step 11:](screenshots/verify_data_flow.png)
-
-* Step 12: Run ElasticSeach mapping template setup
+* Step 11: Run ElasticSeach mapping template setup
 
 ```bash
 podman exec -it elasticsearch bash -c '/scripts/elastic-dynamic-template.sh'
 ```
 
-![Step 12:](screenshots/es_setup.png)
+![Step 11:](screenshots/es_setup.png)
 
-* Step 13: Connect ksqlDB tables to Elasticsearch and Grafana
+* Step 12: Connect ksqlDB tables to Elasticsearch and Grafana
 
 ```bash
 podman exec -it ksqldb-server bash -c '/scripts/ksql-tables-to-grafana.sh'
 ```
 
-![Step 13:](screenshots/connect_tables.png)
+![Step 12:](screenshots/connect_tables.png)
 
-* Step 14: Load dashboards
+* Step 13: Load dashboards
 
 ```bash
 podman exec -it grafana bash -c '/scripts/clickstream-analysis-dashboard.sh'
 ```
 
-![Step 14:](screenshots/load_dashboard.png)
+![Step 13:](screenshots/load_dashboard.png)
 
-* Step 15-18: Sessionize data and oberve results in Grafana and Confluent Control Center
+* Step 14-17: Sessionize data and oberve results in Grafana and Confluent Control Center
 
 ```bash
 ./sessionize-data.sh
 ```
-![Step 15:](screenshots/twelve_connectors.png)
 
-
+![Step 14:](screenshots/twelve_connectors.png)
+![Step 15:](screenshots/session.png)
+![Step 16:](screenshots/clickstream1.png)
+![Step 17:](screenshots/clickstream2.png)

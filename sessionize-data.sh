@@ -17,7 +17,7 @@
 echo "Running for 90 seconds to allow clickstream data to generate"
 
 sleep 90
-for i in {1..100}; do
+for i in {1..10}; do
 
  
  podman-compose exec ksqldb-server curl -X PUT localhost:8083/connectors/DATAGEN_CLICKSTREAM/pause

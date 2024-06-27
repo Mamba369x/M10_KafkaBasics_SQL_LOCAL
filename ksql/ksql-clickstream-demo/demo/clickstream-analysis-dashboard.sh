@@ -26,22 +26,4 @@ else
     url="/dashboard/db/click-stream-analysis"
 fi
 
-echo "Loading Grafana bandwidth dashboard"
-
-RESP="$(curl -s -X "POST" "http://$GRAFANA_HOST:3000/api/dashboards/db" \
-	    -H "Content-Type: application/json" \
-	     --user user:user \
-	     --data-binary @/scripts/bandwidth-dashboard.json)"
-
-#echo $RESP
-echo ""
-echo ""
-
-if [[ $RESP =~ .*\"url\":\"([^\"]*)\".* ]]
-then
-    url="${BASH_REMATCH[1]}"
-else
-    url="/dashboard/db/bandwidth"
-fi
-
 #echo -e "Navigate to:\n\thttp://localhost:3000${url}\n(Default user: user / password: user)"

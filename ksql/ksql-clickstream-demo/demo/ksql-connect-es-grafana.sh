@@ -50,7 +50,7 @@ curl -s -X "POST" "http://$CONNECT_HOST:8083/connectors/" \
     "transforms": "FilterNulls",
     "transforms.FilterNulls.type": "io.confluent.transforms.NullFilter"
   }
-}'
+}' >>/tmp/log.txt 2>&1
 
 
 echo -e "\t\t-> Adding Grafana Source"
@@ -59,4 +59,5 @@ echo -e "\t\t-> Adding Grafana Source"
 curl -s -X "POST" "http://$GRAFANA_HOST:3000/api/datasources" \
 	    -H "Content-Type: application/json" \
 	     --user user:user \
-	     -d $'{"id":1,"orgId":1,"name":"'$table_name'","type":"elasticsearch","typeLogoUrl":"public/app/plugins/datasource/elasticsearch/img/elasticsearch.svg","access":"proxy","url":"http://'$ELASTIC_HOST':9200","password":"","user":"","database":"'$table_name'","basicAuth":false,"isDefault":false,"jsonData":{"timeField":"EVENT_TS","esVersion":70}}'
+	     -d $'{"id":1,"orgId":1,"name":"'$table_name'","type":"elasticsearch","typeLogoUrl":"public/app/plugins/datasource/elasticsearch/img/elasticsearch.svg","access":"proxy","url":"http://'$ELASTIC_HOST':9200","password":"","user":"","database":"'$table_name'","basicAuth":false,"isDefault":false,"jsonData":{"timeField":"EVENT_TS"}}' \
+       >>/tmp/log.txt 2>&1

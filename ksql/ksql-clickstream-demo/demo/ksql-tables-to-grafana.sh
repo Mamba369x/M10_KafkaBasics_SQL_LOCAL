@@ -15,7 +15,7 @@ if [[ -z "${ELASTIC_HOST}" ]]; then
   ELASTIC_HOST="localhost"
 fi
 
-declare -a tables=('click_user_sessions' 'user_ip_activity' 'enriched_error_codes_count' 'errors_per_min_alert' 'errors_per_min' 'events_per_min' 'pages_per_min' 'bandwidth_user_sessions' 'high_bandwidth_user_sessions');
+declare -a tables=('click_user_sessions' 'user_ip_activity' 'enriched_error_codes_count' 'errors_per_min_alert' 'errors_per_min' 'events_per_min' 'pages_per_min');
 for i in "${tables[@]}"
 do
     table_name=$i
@@ -27,17 +27,17 @@ do
     ## Cleanup existing data
 
     echo -e "\t-> Remove any existing Elastic search config"  
-    curl -s -X "DELETE" "http://$ELASTIC_HOST:9200/""$table_name"
+    curl -s -X "DELETE" "http://$ELASTIC_HOST:9200/""$table_name"  >>/tmp/log.txt 2>&1
 
     echo -e "\t-> Remove any existing Connect config"  
-    curl -s -X "DELETE" "http://$CONNECT_HOST:8083/connectors/es_sink_""$TABLE_NAME"
+    curl -s -X "DELETE" "http://$CONNECT_HOST:8083/connectors/es_sink_""$TABLE_NAME"  >>/tmp/log.txt 2>&1
 
     echo -e "\t-> Remove any existing Grafana config"  
-    curl -s -X "DELETE" "http://$GRAFANA_HOST:3000/api/datasources/name/""$table_name" --user user:user
+    curl -s -X "DELETE" "http://$GRAFANA_HOST:3000/api/datasources/name/""$table_name"   --user user:user  >>/tmp/log.txt 2>&1
 
     # Wire in the new connection path
-    echo -e "\t-> Connecting ksqlDB->Elastic->Grafana" "$table_name"
-    ./ksql-connect-es-grafana.sh "$table_name"
+    echo -e "\t-> Connecting ksqlDB->Elastic->Grafana" "$table_name"  2>&1
+    ./ksql-connect-es-grafana.sh "$table_name"  2>&1
 done
 
 echo -e "\n\nDone!"
