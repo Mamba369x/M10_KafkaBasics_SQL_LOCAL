@@ -4,6 +4,29 @@ Link to project repo - https://github.com/Mamba369x/M10_KafkaBasics_SQL_LOCAL
 
 ## Example Usage
 
+* Step 0: To learn basic Kafka operations, proceed with quickstart guide (STEPS 1-5):
+
+Build project using Gradle:
+- ./gradlew jar -PscalaVersion=2.13.12
+
+Run Zookeper and Kafka server:
+- bin/zookeeper-server-start.sh config/zookeeper.properties
+- bin/kafka-server-start.sh config/server.properties
+
+![Step 0:](screenshots/kafka_running.png)
+
+- bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+
+Create topic quickstart-events:
+
+![Step 0:](screenshots/created_topic.png)
+
+Produce and read events from newly created topic.
+- bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+- bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+
+![Step 0:](screenshots/producer_consumer.png)
+
 * Step 1: To install **kafka-connect-datagen** and **kafka-connect-elasticsearch** following command should be used on Mac:
 
 ```bash
